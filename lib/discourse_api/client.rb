@@ -12,4 +12,9 @@ class DiscourseApi::Client < DiscourseApi::Resource
   get :topics_hot => "/hot.json"
   get :categories => "/categories.json"
 
+  # updating a user (the :username argument will be taken from DiscourseApi::Client#api_username)
+  put :update_user => "/users/:username.json", :require => [:username, :bio_raw, :name, :website]
+  put :update_email => "/users/:username/preferences/email.json", :require => [:username, :email]
+  put :update_username => "/users/:username/preferences/username.json", :require => [:username, :new_username]
+
 end

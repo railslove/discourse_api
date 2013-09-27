@@ -4,11 +4,13 @@ require 'minitest/pride'
 
 class ResourceTest < Minitest::Test
   class TestClient < DiscourseApi::Resource
-    post :test => "/hello/:world", :require => [:foo]
+    post :test_post => "/hello/:world", :require => [:foo]
+    put :test_put => "/users/:username.json", :require => [:username]
   end
 
-  def test_method_exists
-    assert_respond_to(TestClient.new, :test)
+  def test_methods_exists
+    assert_respond_to(TestClient.new, :test_post)
+    assert_respond_to(TestClient.new, :test_put)
   end
 
   def test_api_args
