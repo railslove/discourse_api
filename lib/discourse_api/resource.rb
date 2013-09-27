@@ -61,6 +61,7 @@ class DiscourseApi::Resource
     actual_args = api_args(actual_args)
     request_class = "Net::HTTP::#{request_method.camelize}"
     req = request_class.constantize.new(path, initheader = {'Content-Type' =>'application/json'})
+    req.body = api_args(actual_args).to_json
     http_client.start {|http| http.request(req) }
   end
 
